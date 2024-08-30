@@ -1,0 +1,14 @@
+==== GAME ====
+Developer: VIV
+Art: VIV
+Idea: VIV
+
+==== PLAY TESTERS ====
+
+==== THIRD PARTY ASSETS ====
+Font, Antiquity Script: https://ninjikin.itch.io/font-antiquity-script
+Font, Thaleah Fat: https://tinyworlds.itch.io/free-pixel-font-thaleah
+
+==== TOOLS USED ====
+* Bevy
+* Libresprite
