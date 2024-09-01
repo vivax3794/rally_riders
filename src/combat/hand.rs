@@ -1,6 +1,6 @@
 use super::card::{Card, CardGray, Deck, ShowFront};
 use super::hovering::Hovered;
-use super::{AllowedToPlay, PlayerReference};
+use super::{AllowedToPlay, PlayerReference, TurnState, WhosTurnIsIt};
 use crate::position::{AxisAnchor, Relative, RelativeAxis};
 use crate::prelude::*;
 
@@ -39,7 +39,10 @@ impl Plugin for HandPlugin {
                 setup_cards_in_hand,
                 position_cards_in_hand,
                 show_allowed_cards,
-                handle_play_input,
+                handle_play_input.run_if(
+                    in_state(TurnState::PlayCreature)
+                        .and_then(in_state(WhosTurnIsIt(PlayerReference::Player))),
+                ),
                 remove_played_card_from_hand,
             )
                 .run_if(in_state(MainState::Combat)),
