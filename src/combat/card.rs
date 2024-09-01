@@ -64,7 +64,8 @@ impl Plugin for CardPlugin {
                 update_card_stats,
                 update_shown_side,
                 set_grayscale,
-            ),
+            )
+                .run_if(in_state(MainState::Combat)),
         );
     }
 }
@@ -210,7 +211,7 @@ pub fn spawn_card(
 }
 
 fn update_card_stats(
-    cards: Query<(&Hp, &Power, &Children), With<Card>>,
+    cards: Query<(&Hp, &Power, &Children), (With<Card>, Or<(Changed<Hp>, Changed<Power>)>)>,
     fronts: Query<&Children, With<Front>>,
     mut text: Query<&mut Text, With<CardStatsText>>,
 ) {
@@ -229,7 +230,7 @@ fn update_card_stats(
 }
 
 fn update_card_crowd(
-    cards: Query<(&Costs, &Children), With<Card>>,
+    cards: Query<(&Costs, &Children), (With<Card>, Changed<Costs>)>,
     fronts: Query<&Children, With<Front>>,
     mut text: Query<&mut Text, With<CardCostsText>>,
 ) {
@@ -248,7 +249,7 @@ fn update_card_crowd(
 }
 
 fn update_shown_side(
-    cards: Query<(&ShowFront, &Children), With<Card>>,
+    cards: Query<(&ShowFront, &Children), (With<Card>, Changed<ShowFront>)>,
     // The negative queries are to make bevys conflict detector happy,
     // which is fair it is possible we have a entity with both front and back in theory
     // (but ofc that should never happen in practice)

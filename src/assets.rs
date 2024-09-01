@@ -10,6 +10,7 @@ impl Plugin for AssetPlugin {
             LoadingState::new(crate::MainState::Loading)
                 .continue_to_state(crate::MainState::TestingSetup)
                 .load_collection::<Fonts>()
+                .load_collection::<Icons>()
                 .load_collection::<Cards>()
                 .load_collection::<HealthBar>(),
         );
@@ -20,6 +21,14 @@ impl Plugin for AssetPlugin {
 pub struct Fonts {
     #[asset(path = "Fonts/pixel.ttf")]
     pub pixel: Handle<Font>,
+}
+
+#[derive(AssetCollection, Resource)]
+pub struct Icons {
+    #[asset(texture_atlas_layout(tile_size_x = 32, tile_size_y = 32, columns = 4, rows = 1,))]
+    pub turn_layout: Handle<TextureAtlasLayout>,
+    #[asset(path = "Icons/turn_icons.png")]
+    pub turn_icons: Handle<Image>,
 }
 
 #[derive(AssetCollection, Resource)]

@@ -17,7 +17,8 @@ impl Plugin for BattlePlugin {
                 move_card_to_battlefield,
                 position_cards_in_battle,
                 update_crowd_value,
-            ),
+            )
+                .run_if(in_state(MainState::Combat)),
         );
     }
 }
@@ -46,7 +47,7 @@ fn move_card_to_battlefield(
 
 #[allow(clippy::cast_precision_loss)] // The hand should never be very large
 fn position_cards_in_battle(
-    battlefields: Query<(&BattleField, &PlayerReference)>,
+    battlefields: Query<(&BattleField, &PlayerReference), Changed<BattleField>>,
     mut cards: Query<(&mut Relative, &mut Transform), With<Card>>,
 ) {
     for (hand, player) in &battlefields {
@@ -89,7 +90,7 @@ fn position_cards_in_battle(
 #[allow(clippy::cast_possible_truncation)]
 fn update_crowd_value(
     mut players: Query<(&mut Crowd, &PlayerReference)>,
-    battlefields: Query<(&BattleField, &PlayerReference)>,
+    battlefields: Query<(&BattleField, &PlayerReference), Changed<BattleField>>,
 ) {
     for (battle, player) in &battlefields {
         let Some((mut crowd, _)) = players.iter_mut().find(|(_, p)| *p == player) else {
