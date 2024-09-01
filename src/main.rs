@@ -38,6 +38,7 @@
 mod assets;
 mod combat;
 mod data;
+mod position;
 
 #[allow(unused_imports)]
 mod prelude {
@@ -51,6 +52,7 @@ use prelude::*;
 pub enum MainState {
     #[default]
     Loading,
+    TestingSetup,
     Combat,
 }
 
@@ -61,7 +63,7 @@ fn main() {
         mode: bevy_embedded_assets::PluginMode::ReplaceDefault,
     });
 
-    app.add_plugins(DefaultPlugins);
+    app.add_plugins(DefaultPlugins.set(ImagePlugin::default_nearest()));
 
     #[cfg(feature = "dev")]
     {
@@ -73,15 +75,25 @@ fn main() {
     app.insert_resource(data::PlayerInfo {
         max_hp: 20,
         current_hp: 20,
+        deck: Vec::new(),
     });
-    app.add_plugins((assets::AssetPlugin, combat::CombatPlugin));
+    app.add_plugins((
+        assets::AssetPlugin,
+        combat::CombatPlugin,
+        position::PositionPlugin,
+    ));
 
     // app.add_systems(Update, ());
     app.add_systems(Startup, (setup_camera,));
+    app.add_systems(OnEnter(MainState::TestingSetup), enter_combat);
 
     app.run();
 }
 
 fn setup_camera(mut commands: Commands) {
     commands.spawn(Camera2dBundle::default());
+}
+
+fn enter_combat(mut state: ResMut<NextState<MainState>>) {
+    state.set(MainState::Combat);
 }

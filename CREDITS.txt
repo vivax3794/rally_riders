@@ -1,14 +1,21 @@
 ==== GAME ====
-Developer: VIV
-Art: VIV
-Idea: VIV
+Developer: Viv
+Art: Viv
+Idea: Viv
 
 ==== PLAY TESTERS ====
+* MatisseTec - https://www.twitch.tv/matissetec
 
 ==== THIRD PARTY ASSETS ====
-Font, Antiquity Script: https://ninjikin.itch.io/font-antiquity-script
-Font, Thaleah Fat: https://tinyworlds.itch.io/free-pixel-font-thaleah
+* Font, "Antiquity Script" by Ninjikin: https://ninjikin.itch.io/font-antiquity-script
+* Font, "Thaleah Fat" by TinyWorlds: https://tinyworlds.itch.io/free-pixel-font-thaleah
 
 ==== TOOLS USED ====
-* Bevy
-* Libresprite
+* Bevy 0.14: https://bevyengine.org/
+* Libresprite: https://libresprite.github.io/
+* bevy_asset_loader: https://github.com/NiklasEi/bevy_asset_loader
+* bevy_embedded_assets: https://github.com/vleue/bevy_embedded_assets
+
+==== SPECIAL THANKS ====
+* Bevy discord community, feedback and help: https://discord.gg/bevy
+

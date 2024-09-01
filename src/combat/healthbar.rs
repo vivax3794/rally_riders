@@ -12,6 +12,7 @@ struct BarChild(Entity);
 pub struct HealthBarBundle {
     health_bar: HealthBar,
     text: TextBundle,
+    name: Name,
 }
 
 #[derive(Component)]
@@ -28,6 +29,7 @@ impl HealthBarBundle {
             style.bottom = Val::Px(0.0);
         }
         Self {
+            name: Name::new("Healthbar"),
             health_bar: HealthBar(entity),
             text: TextBundle {
                 text: Text::from_section(
