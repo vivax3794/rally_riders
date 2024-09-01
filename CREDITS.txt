@@ -4,7 +4,6 @@ Art: Viv
 Idea: Viv
 
 ==== PLAY TESTERS ====
-* MatisseTec - https://www.twitch.tv/matissetec
 
 ==== THIRD PARTY ASSETS ====
 * Font, "Antiquity Script" by Ninjikin: https://ninjikin.itch.io/font-antiquity-script
